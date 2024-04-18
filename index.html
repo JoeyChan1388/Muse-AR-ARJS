@@ -22,13 +22,14 @@
     </a-scene>
   </body>
   <script>
-    const marker = document.querySelector("a-marker");
+    const marker = document.querySelector("a-marker-camera");
     const model = document.querySelector("a-entity");
     const camera = document.querySelector("a-entity[camera]");
 
     // once marker is found, show the model
     marker.addEventListener("markerFound", () => {
       model.setAttribute("visible", true);
+      window.alert("Marker Found");
     });
 
     function handleOrientation(event) {
