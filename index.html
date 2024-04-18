@@ -10,14 +10,14 @@
   </head>
   <body>
     <a-scene embedded arjs>
-      <a-marker preset="hiro">
+      <a-marker-camera preset="hiro">
         <a-entity
           position="0 0 0"
           scale="10 10 10"
           gltf-model="./models/sphere.glb"
         ></a-entity>
-      </a-marker>
-      <a-entity camera></a-entity>
+      </a-marker-camera>
+      <!-- <a-entity camera></a-entity> -->
     </a-scene>
   </body>
   <script>
