@@ -21,18 +21,10 @@
     </a-scene>
   </body>
   <script>
-        AFRAME.registerComponent('video-logic', {
-        init: function () {
-            const marker = document.querySelector("a-marker");
+    const marker = document.querySelector("a-marker");
 
-            marker.addEventListener("markerFound", evt => {
-              // you can wait a while so the content won't appear somewhere on the border
-              setTimeout(evt => {
-                this.el.setAttribute("position", marker.getAttribute("position"));
-                this.el.setAttribute("rotation", marker.getAttribute("rotation"));
-              }, 500)
-            })
-        }
+    marker.addEventListener("markerFound", (evt) => {
+        window.alert("Marker Found");
     });
   </script>
 </html>
