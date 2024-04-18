@@ -34,7 +34,7 @@
     // const marker = document.querySelector("a-marker");
     // const markerModel = document.querySelector("#markerModel");
     // Model when marker is not to be found
-    const model =  document.querySelector("#model");
+    const model = document.querySelector("#model");
     const camera = document.querySelector("a-entity[camera]");
 
     // // once marker is found, show the model
@@ -49,14 +49,20 @@
     //   model.setAttribute("visible", true);
     // });
 
-    function handleOrientation(event) {
-      const x = event.beta; // In degree in the range [-180,180]
-      const y = event.gamma; // In degree in the range [-90,90]
-      const z = event.alpha; // In degree in the range [0,360]
+    // function handleOrientation(event) {
+    //   const x = event.beta; // In degree in the range [-180,180]
+    //   const y = event.gamma; // In degree in the range [-90,90]
+    //   const z = event.alpha; // In degree in the range [0,360]
 
-      camera.setAttribute("rotation", { x: y, y: z, Z: x});
-    }
+    //   camera.setAttribute("rotation", { x: y, y: z, Z: x});
+    // }
 
-    window.addEventListener("deviceorientation", handleOrientation, true);
+    window.addEventListener("deviceorientation", function (e) {
+      var gammaRotation = e.gamma ? e.gamma * (Math.PI / 180) : 0;
+      camera.rotation.y = gammaRotation;
+      camera.setAttribute("rotation", { X: 0, Y: gammaRotation,Z: 0});
+    });
+
+    // window.addEventListener("deviceorientation", handleOrientation, true);
   </script>
 </html>
