@@ -13,6 +13,7 @@
   <body>
     <a-scene arjs embedded>
       <a-assets>
+        <img id="den_1" src="./tiles/den_1.jpg">
         <img id="den_2" src="./tiles/den_2.jpg">
       </a-assets>
 
@@ -21,6 +22,7 @@
         position="0 0 0"
         scale="10 10 10"
         gltf-model="./models/sphere.glb"
+        material="src: #den_1"
         visible="true"
       ></a-entity>
       <!-- <a-entity
@@ -45,7 +47,8 @@
 
     function openMenu() {
       console.log("Opening menu");      
-      model.setAttribute("material", { src: "#den_2" });
+      model.setAttribute("material", "src", "#den_2");
+      console.log("Model: ", model.getObject3D('mesh'));
     }
 
     function handleOrientation(event) {
