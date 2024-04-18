@@ -10,26 +10,44 @@
   </head>
   <body>
     <a-scene>
-      <a-marker-camera preset="hiro">
+      <a-marker preset="hiro">
         <a-entity
+          id="markerModel"
           position="0 0 0"
           scale="10 10 10"
           gltf-model="./models/sphere.glb"
-          visible="false"
         ></a-entity>
-      </a-marker-camera>
+      </a-marker>
+
+      <a-entity
+        id="model"
+        position="0 0 0"
+        scale="10 10 10"
+        gltf-model="./models/sphere.glb"
+      ></a-entity>
       <!-- <a-entity camera></a-entity> -->
     </a-scene>
   </body>
   <script>
-    const marker = document.querySelector("a-marker-camera");
-    const model = document.querySelector("a-entity");
+    const scene = document.querySelector("a-scene");
+    const marker = document.querySelector("a-marker");
+    const markerModel = document.querySelector("#markerModel");
+    // Model when marker is not to be found
+    const model = scene.createElement("#model");
     const camera = document.querySelector("a-entity[camera]");
 
     // once marker is found, show the model
     marker.addEventListener("markerFound", () => {
-      model.setAttribute("visible", true);
       window.alert("Marker Found");
+      markerModel.setAttribute("visible", true);
+      model.setAttribute("visible", false);
+    });
+
+    // once marker is found, show the model
+    marker.addEventListener("markerLost", () => {
+      window.alert("Marker Lost");
+      markerModel.setAttribute("visible", false);
+      model.setAttribute("visible", true);
     });
 
     function handleOrientation(event) {
