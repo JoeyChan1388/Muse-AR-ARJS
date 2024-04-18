@@ -11,12 +11,14 @@
   <body>
     <a-scene embedded arjs>
       <a-marker preset="hiro">
-        <a-entity
+        
+      </a-marker>
+      <a-entity
           position="0 0 0"
           scale="10 10 10"
           gltf-model="./models/sphere.glb"
         ></a-entity>
-      </a-marker>
+
       <a-entity camera></a-entity>
     </a-scene>
   </body>
@@ -24,7 +26,7 @@
     const marker = document.querySelector("a-marker");
 
     marker.addEventListener("markerFound", (evt) => {
-        window.alert("Marker Found");
+        window.alert("Marker Found at" + evt.target.getAttribute('position'));
     });
   </script>
 </html>
