@@ -26,7 +26,8 @@
     const marker = document.querySelector("a-marker");
 
     marker.addEventListener("markerFound", (evt) => {
-        window.alert("Marker Found at" + evt.target.getAttribute('position'));
+        console.log("Marker Found at", evt.target.getAttribute('position'));
+        // window.alert("Marker Found at" + evt.target.getAttribute('position'));
     });
   </script>
 </html>
