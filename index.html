@@ -50,9 +50,9 @@
     // });
 
     function handleOrientation(event) {
-      const x = event.beta;
-      const y = event.gamma;
-      const z = event.alpha;
+      const x = event.beta + 90;
+      const y = event.gamma + 90;
+      const z = event.alpha + 90;
 
       camera.setAttribute("rotation", `${x} ${y} ${z}`);
     }
