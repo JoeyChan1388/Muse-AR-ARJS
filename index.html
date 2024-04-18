@@ -45,7 +45,7 @@
           node.material.map = new THREE.TextureLoader().load(
             "./tiles/den_2.jpg"
           );
-          node.material.rotation = Math.PI;
+          model.setAttribute('rotation', { x: 0, y: 0, z: 180 });
         }
       });
 
