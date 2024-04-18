@@ -60,7 +60,7 @@
     window.addEventListener("deviceorientation", function (e) {
       var gammaRotation = e.gamma ? e.gamma * (Math.PI / 180) : 0;
       camera.rotation.y = gammaRotation;
-      camera.setAttribute("rotation", { X: 0, Y: gammaRotation,Z: 0});
+      camera.setAttribute("rotation", { x: 0, y: gammaRotation,z: 0});
     });
 
     // window.addEventListener("deviceorientation", handleOrientation, true);
