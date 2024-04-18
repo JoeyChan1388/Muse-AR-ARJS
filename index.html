@@ -54,8 +54,8 @@
     }
 
     function handleOrientation(event) {
-      const alphaRad = DegToRad(vent.alpha);
-      const betaRad = DegToRad(vent.beta);
+      const alphaRad = DegToRad(event.alpha);
+      const betaRad = DegToRad(event.beta);
       const gammaRad = DegToRad(event.gamma);
 
       model.setAttribute("rotation", { x: betaRad, y: alphaRad, z: gammaRad });
