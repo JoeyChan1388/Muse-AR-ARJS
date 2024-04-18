@@ -42,10 +42,12 @@
 
       modelMesh.traverse(function (node) {
         if (node.isMesh) {
-          node.material.map = new THREE.TextureLoader().load(
+          let newTexture = new THREE.TextureLoader().load(
             "./tiles/den_2.jpg"
           );
-          model.setAttribute('rotation', { x: 0, y: 0, z: 180 });
+          newTexture.rotation = Math.PI / 2;
+
+          node.material.map = newTexture;
         }
       });
 
