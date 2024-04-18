@@ -37,6 +37,8 @@
     const model = document.querySelector("#model");
     const camera = document.querySelector("#camera");
 
+    camera.rotationOrder = "ZXY";
+
     // // once marker is found, show the model
     // marker.addEventListener("markerFound", () => {
     //   window.alert("Marker Found");
@@ -58,7 +60,7 @@
       const betaRad = DegToRad(event.beta);
       const gammaRad = DegToRad(event.gamma);
 
-      model.setAttribute("rotation", { x: betaRad, y: alphaRad, z: gammaRad });
+      model.setAttribute("rotation", { x: betaRad, y: gammaRad, z: alphaRad });
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
