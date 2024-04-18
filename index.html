@@ -37,16 +37,8 @@
     const model = document.querySelector("#model");
     const camera = document.querySelector("#camera");
 
-    function DegToRad(angleInDegrees) {
-      return (angleInDegrees * Math.PI) / 180;
-    }
-
     function handleOrientation(event) {
-      const alphaRad = DegToRad(event.alpha);
-      const betaRad = DegToRad(event.beta);
-      const gammaRad = DegToRad(event.gamma);
-
-      model.setAttribute("rotation", { x: (event.beta), y: event.alpha, z: event.gamma });
+      model.setAttribute("rotation", { x: -(event.beta), y: -event.gamma, z: -event.alpha });
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
