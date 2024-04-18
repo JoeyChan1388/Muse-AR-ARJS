@@ -25,18 +25,10 @@
         material="src: #den_1"
         visible="true"
       ></a-entity>
-      <!-- <a-entity
-        id="den_2"
-        position="0 0 0"
-        scale="10 10 10"
-        gltf-model="./models/sphere.glb"
-        material="src: #den_2"
-        visible="true"
-      ></a-entity> -->
       <a-entity id="camera" rotation="0 0 0" camera></a-entity>
     </a-scene>
 
-    <button class="views-button" onclick="openMenu()">Views</button>
+    <button class="views-button" onclick="changePackage()">Change Package</button>
   </body>
   <script>
     const scene = document.querySelector("a-scene");
@@ -45,23 +37,15 @@
     const model = document.querySelector("#model");
     const camera = document.querySelector("#camera");
 
-    function openMenu() {
-      console.log("Opening menu");
-      // model.setAttribute("material", "src", "#den_2");
-
-      // console.log("Model: ", model.getObject3D('mesh'));
-
+    function changePackage() {
       let modelMesh = model.getObject3D("mesh");
 
       modelMesh.traverse(function (node) {
         if (node.isMesh) {
-          // if (node.name === 'myModelName'){
-          // node.material do stuff to your material
-          //}
-          //  console.log(node.name,  node.material);
           node.material.map = new THREE.TextureLoader().load(
             "./tiles/den_2.jpg"
           );
+          node.material.rotation = Math.PI;
         }
       });
 
