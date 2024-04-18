@@ -45,8 +45,6 @@
           let newTexture = new THREE.TextureLoader().load(
             "./tiles/den_2.jpg"
           );
-          // Rotate the node material 180 degrees
-          node.material.map.rotation = Math.PI;
           node.material.map = newTexture;
         }
       });
