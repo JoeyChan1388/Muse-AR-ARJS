@@ -15,6 +15,7 @@
           position="0 0 0"
           scale="10 10 10"
           gltf-model="./models/sphere.glb"
+          visible="false"
         ></a-entity>
       </a-marker-camera>
       <!-- <a-entity camera></a-entity> -->
@@ -24,6 +25,11 @@
     const marker = document.querySelector("a-marker");
     const model = document.querySelector("a-entity");
     const camera = document.querySelector("a-entity[camera]");
+
+    // once marker is found, show the model
+    marker.addEventListener("markerFound", () => {
+      model.setAttribute("visible", true);
+    });
 
     function handleOrientation(event) {
       const x = event.beta;
