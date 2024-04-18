@@ -10,30 +10,27 @@
   </head>
   <body>
     <a-scene embedded arjs>
-      <a-marker-camera preset="hiro">
-        <a-entity
-          position="0 0 0"
-          scale="10 10 10"
-          gltf-model="./models/sphere.glb"
-        ></a-entity>
-      </a-marker-camera>
-      <!-- <a-entity camera></a-entity> -->
+      <a-entity
+      position="0 0 0"
+      scale="10 10 10"
+      gltf-model="./models/sphere.glb"
+    ></a-entity>
+
+      <a-entity camera></a-entity>
     </a-scene>
   </body>
   <script>
     const marker = document.querySelector("a-marker");
     const model = document.querySelector("a-entity");
 
-    marker.addEventListener("markerFound", (evt) => {
-        console.log("Marker Found at", evt.target.getAttribute('position'));
-        // window.alert("Marker Found at" + evt.target.getAttribute('position'));
+    function handleOrientation(event) {
+      const x = event.beta;
+      const y = event.gamma;
+      const z = event.alpha;
 
-        //Set the models position to the markers position
-        model.setAttribute("position", evt.target.getAttribute('position'));
-    });
+      model.setAttribute("rotation", `${x} ${y} ${z}`);
+    }
 
-    marker.addEventListener("markerFound", (evt) => {
-        model.setAttribute("visible", true);
-    });
+    window.addEventListener("deviceorientation", handleOrientation, true);
   </script>
 </html>
