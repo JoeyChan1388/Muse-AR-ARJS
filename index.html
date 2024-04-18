@@ -26,7 +26,7 @@
         gltf-model="./models/sphere.glb"
         visible="true"
       ></a-entity>
-      <a-entity camera></a-entity>
+      <a-entity id="camera" camera></a-entity>
     </a-scene>
   </body>
   <script>
@@ -35,7 +35,7 @@
     // const markerModel = document.querySelector("#markerModel");
     // Model when marker is not to be found
     const model = document.querySelector("#model");
-    const camera = document.querySelector("a-entity[camera]");
+    const camera = document.querySelector("#camera");
 
     // // once marker is found, show the model
     // marker.addEventListener("markerFound", () => {
@@ -54,15 +54,11 @@
     }
 
     function handleOrientation(event) {
-      const x = event.beta; // In degree in the range [-180,180]
-      const y = event.gamma; // In degree in the range [-90,90]
-      const z = event.alpha; // In degree in the range [0,360]
+      const alphaRad = DegToRad(vent.alpha);
+      const betaRad = DegToRad(vent.beta);
+      const gammaRad = DegToRad(event.gamma);
 
-      const alphaRad = DegToRad(alpha);
-      const betaRad = DegToRad(beta);
-      const gammaRad = DegToRad(gamma);
-
-      camera.setAttribute("rotation", { x: betaRad, y: alphaRad, Z: gammaRad });
+      camera.setAttribute("rotation", { x: betaRad, y: alphaRad, z: gammaRad });
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
