@@ -7,8 +7,13 @@
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+
+    <link rel="stylesheet" href="./index.css">
   </head>
   <body>
+    <a-assets>
+      <img id="den_2" src="./tiles/den_2.jpg">
+    </a-assets>
     <a-scene arjs embedded>
       <a-entity
         id="model"
@@ -20,20 +25,22 @@
       <a-entity id="camera" rotation="0 0 0" camera></a-entity>
     </a-scene>
 
-    <div class="buttons">
-      <button style="position: absolute; bottom: 0; left: 0;">Button</button>
-    </div>
+    <button class="views-button" onclick='openMenu()'>Views</button>
   </body>
   <script>
     const scene = document.querySelector("a-scene");
-    // const marker = document.querySelector("a-marker");
-    // const markerModel = document.querySelector("#markerModel");
+    
     // Model when marker is not to be found
     const model = document.querySelector("#model");
     const camera = document.querySelector("#camera");
 
+    function openMenu() {
+      console.log("Opening menu");
+    }
+
     function handleOrientation(event) {
       model.setAttribute("rotation", { x: -(event.beta), y: -event.gamma, z: -event.alpha });
+      model.setAttribute("material", { src: "#den_2" });
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
