@@ -61,7 +61,7 @@
       // X -> BETA = LOOK UP AND DOWN
       // Y -> GAMMA = LOOK LEFT AND RIGHT
       // Z -> ALPHA = ROTATE AROUND Z AXIS
-      model.setAttribute("rotation", { x: -event.beta, y: -event.gamma, z: -event.alpha });
+      camera.setAttribute("rotation", { x: event.beta, y: event.gamma, z: event.alpha });
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
