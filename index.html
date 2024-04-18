@@ -39,16 +39,14 @@
 
     // once marker is found, show the model
     marker.addEventListener("markerFound", () => {
-      window.alert("Marker Found");
-      markerModel.setAttribute("visible", true);
-      model.setAttribute("visible", false);
+      // window.alert("Marker Found");
+      model.object3D.visible = false;
     });
 
     // once marker is found, show the model
     marker.addEventListener("markerLost", () => {
-      window.alert("Marker Lost");
-      markerModel.setAttribute("visible", false);
-      model.setAttribute("visible", true);
+      // window.alert("Marker Lost");
+      model.object3D.visible = true;
     });
 
     function handleOrientation(event) {
