@@ -22,10 +22,18 @@
   </body>
   <script>
     const marker = document.querySelector("a-marker");
+    const model = document.querySelector("a-entity");
 
     marker.addEventListener("markerFound", (evt) => {
         console.log("Marker Found at", evt.target.getAttribute('position'));
         // window.alert("Marker Found at" + evt.target.getAttribute('position'));
+
+        //Set the models position to the markers position
+        model.setAttribute("position", evt.target.getAttribute('position'));
+    });
+
+    marker.addEventListener("markerFound", (evt) => {
+        model.setAttribute("visible", true);
     });
   </script>
 </html>
