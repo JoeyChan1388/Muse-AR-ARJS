@@ -26,7 +26,7 @@
         gltf-model="./models/sphere.glb"
         visible="true"
       ></a-entity>
-      <a-entity id="camera" rotation="-90 0 0" camera></a-entity>
+      <a-entity id="camera" rotation="0 90 0" camera></a-entity>
     </a-scene>
   </body>
   <script>
@@ -37,18 +37,6 @@
     const model = document.querySelector("#model");
     const camera = document.querySelector("#camera");
 
-    // // once marker is found, show the model
-    // marker.addEventListener("markerFound", () => {
-    //   window.alert("Marker Found");
-    //   model.setAttribute("visible", false);
-    // });
-
-    // // once marker is found, show the model
-    // marker.addEventListener("markerLost", () => {
-    //   window.alert("Marker Lost");
-    //   model.setAttribute("visible", true);
-    // });
-
     function DegToRad(angleInDegrees) {
       return (angleInDegrees * Math.PI) / 180;
     }
@@ -58,10 +46,6 @@
       const betaRad = DegToRad(event.beta);
       const gammaRad = DegToRad(event.gamma);
 
-      // X -> BETA = LOOK UP AND DOWN
-      // Y -> GAMMA = LOOK LEFT AND RIGHT
-      // Z -> ALPHA = ROTATE AROUND Z AXIS
-      // Cam has a different orientation order
       model.setAttribute("rotation", { x: (event.beta), y: event.gamma, z: event.alpha });
     }
 
