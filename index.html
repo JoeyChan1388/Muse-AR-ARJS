@@ -62,7 +62,7 @@
       // Y -> GAMMA = LOOK LEFT AND RIGHT
       // Z -> ALPHA = ROTATE AROUND Z AXIS
       // Cam has a different orientation order
-      model.setAttribute("rotation", { x: -(event.beta - 90), y: -event.alpha, z: -event.gamma });
+      model.setAttribute("rotation", { x: -(event.beta), y: -event.gamma, z: -event.alpha });
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
