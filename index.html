@@ -29,7 +29,7 @@
       const y = event.gamma;
       const z = event.alpha;
 
-      camera.setAttribute("rotation", `${x} ${y} ${z}`);
+      model.setAttribute("rotation", `${x} ${y} ${z}`);
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
