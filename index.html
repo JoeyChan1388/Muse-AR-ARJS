@@ -58,7 +58,7 @@
       const betaRad = DegToRad(event.beta);
       const gammaRad = DegToRad(event.gamma);
 
-      model.setAttribute("rotation", { x: betaRad, y: gammaRad, z: alphaRad });
+      model.setAttribute("rotation", { x: event.beta, y: event.gamma, z: event.alpha });
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
