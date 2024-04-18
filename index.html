@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ar.js Test</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <a-scene embedded arjs>
-        <a-marker-camera preset="hiro">
-          <a-entity
-            position="0 0 0"
-            scale="10 10 10"
-            gltf-model="./models/sphere.glb"
-          ></a-entity>
-        </a-marker-camera>
-      </a-scene>
-</body>
+      <a-marker preset="hiro">
+        <a-entity
+          position="0 0 0"
+          scale="10 10 10"
+          gltf-model="./models/sphere.glb"
+        ></a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+  <script>
+        AFRAME.registerComponent('video-logic', {
+        init: function () {
+            const marker = document.querySelector("a-marker");
+
+            marker.addEventListener("markerFound", evt => {
+              // you can wait a while so the content won't appear somewhere on the border
+              setTimeout(evt => {
+                this.el.setAttribute("position", marker.getAttribute("position"));
+                this.el.setAttribute("rotation", marker.getAttribute("rotation"));
+              }, 500)
+            })
+        }
+    });
+  </script>
 </html>
