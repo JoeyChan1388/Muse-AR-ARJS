@@ -29,7 +29,7 @@
       <a-entity id="camera" rotation="180 0 0" camera></a-entity>
     </a-scene>
 
-    <button class="views-button" onclick="changePackage(`den2.jpg`)">
+    <button class="views-button" onclick="changePackage(`den_2.jpg`)">
       Change Package
     </button>
   </body>
@@ -64,8 +64,8 @@
     function handleOrientation(event) {
       model.setAttribute("rotation", {
         x: -event.beta,
-        y: -event.gamma,
-        z: -event.alpha,
+        y: event.gamma,
+        z: event.alpha,
       });
     }
 
