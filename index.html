@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <a-scene vr-mode-ui="enabled: false" embedded>
+    <a-scene vr-mode-ui="enabled: false">
       <a-assets>
         <img id="den_1" src="./tiles/den_1.jpg" />
         <img id="den_2" src="./tiles/den_2.jpg" />
@@ -37,6 +37,14 @@
   </body>
   <script>
     const scene = document.querySelector("a-scene");
+
+    // Check if there are device orientation controls
+    if (window.DeviceOrientationEvent) {
+      console.log("Device orientation supported");
+      scene.setAttribute("embedded", "true");
+    } else {
+      console.log("Device orientation not supported");
+    }
 
     // Model when marker is not to be found
     const model = document.querySelector("#model");
