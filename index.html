@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
+    <!-- Scene for AR -->
     <a-scene vr-mode-ui="enabled: false">
+      <!-- Assets to be used -->
       <a-assets>
-        <img id="den_1" src="./tiles/den_1.jpg" />
-        <img id="den_2" src="./tiles/den_2.jpg" />
+        <img id="den_1" src="./tiles/1/den.jpg" />
       </a-assets>
 
+      <!-- Model of the room -->
       <a-entity
         id="model"
         position="0 0 0"
@@ -27,15 +29,19 @@
         visible="true"
       >
       </a-entity>
-      <a-entity
-        id="marker"
+
+      <!-- Example hotspot, directly in front of the camera, takes person to entrance scene -->
+      <!-- <a-entity
+        id="hotspot"
         class="clickable"
         geometry="primitive: sphere"
         material="color: white"
-        position="0 0 -4"
+        position="0 0.5 -4"
         scale="0.1 0.1 0.1"
-        onclick="changePackage(`entrance_1.jpg`)"
-      ></a-entity>
+        onclick="changeScene(`entrance.jpg`)"
+      ></a-entity> -->
+
+      <!-- Camera entity -->
       <a-entity
         id="camera"
         rotation="0 0 0"
@@ -43,53 +49,75 @@
         camera
         look-controls
       >
-      <a-entity
-            cursor="fuse: true; fuseTimeout: 500"
-            objects=".clickable"
-            position="0 0 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-            material="color: black; shader: flat">
-      </a-entity>
+        <!-- Cursor for mobile mode -->
+        <a-entity
+          cursor="fuse: true; fuseTimeout: 500"
+          objects=".clickable"
+          position="0 0 -1"
+          geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+          material="color: black; shader: flat"
+        >
+        </a-entity>
       </a-entity>
     </a-scene>
 
-    <button class="views-button" onclick="changePackage(`den_2.jpg`)">
+    <!-- Button to change the package -->
+    <button class="views-button" onclick="changePackage()">
       Change Package
     </button>
   </body>
   <script>
+    // Example of hotspot array 
+    const sceneHotspots = {
+      // Hotspots for "den"
+      den: {
+        entrance: {
+          // Position of the hotspot around the room
+          position: "0 -0.2 -4",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          // Change the parameter to the file of the scene you want to go to
+          onclick: "changeScene(`entrance.jpg`)",
+        },
+      },
+      // Hotspots for "entrance"
+      entrance: {
+        den: {
+          position: "0 -0.2 4",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`den.jpg`)",
+        },
+      },
+    };
+
     const scene = document.querySelector("a-scene");
     const camera = document.querySelector("#camera");
     const model = document.querySelector("#model");
 
     let selectedPackageIndex = 1;
+    let selectedScene = "den";
 
     // Check if there are device orientation controls
     if (window.DeviceOrientationEvent) {
       console.log("Device orientation supported");
       scene.setAttribute("embedded", "true");
-
-      // Add cursor inside camera element
-      // camera.innerHTML += `<a-entity
-      //       position="0 0 -1"
-      //       geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-      //       material="color: black; shader: flat">`;
     } else {
       console.log("Device orientation not supported");
     }
 
     model.addEventListener("object3dset", () => {
       console.log("Model loaded");
-      changePackage("den_1.jpg");
+      changeScene("den.jpg");
     });
 
-    function changePackage(fileName) {
+    function changeScene(fileName) {
       let modelMesh = model.getObject3D("mesh");
 
       modelMesh.traverse(function (node) {
         if (node.isMesh) {
           let newTexture = new THREE.TextureLoader().load(
-            `./tiles/${fileName}`
+            `./tiles/${selectedPackageIndex}/${fileName}`
           );
           node.material.map = newTexture;
           node.material.side = THREE.DoubleSide;
@@ -97,7 +125,33 @@
       });
 
       console.log("Model: ", modelMesh);
+
+      // Delete all clickables
+      let clickables = document.querySelectorAll(".clickable");
+      clickables.forEach((clickable) => clickable.parentNode.removeChild(clickable));
+
+      // Add new clickables
+      Object.keys(sceneHotspots[selectedScene]).forEach((hotspot) => {
+        let hotspotData = sceneHotspots[selectedScene][hotspot];
+        let newHotspot = document.createElement("a-entity");
+        newHotspot.setAttribute("class", "clickable");
+        newHotspot.setAttribute("geometry", "primitive: sphere");
+        newHotspot.setAttribute("material", "color: white");
+        newHotspot.setAttribute("position", hotspotData.position);
+        newHotspot.setAttribute("scale", hotspotData.scale);
+        newHotspot.setAttribute("onclick", hotspotData.onclick);
+        scene.appendChild(newHotspot);
+      });
+
+      // Set the selected scene (without the file extension)
+      selectedScene = fileName.split(".")[0];
     }
+
+    function changePackage() {
+        selectedPackageIndex = selectedPackageIndex === 1 ? 2 : 1;
+        console.log("Selected package: ", selectedPackageIndex);
+        changeScene(selectedScene + ".jpg");
+      }
 
     function handleOrientation(event) {
       // For moving the model with the device orientation model rotation 0,0,0 and camera rotation 0,180,0
