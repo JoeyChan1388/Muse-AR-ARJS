@@ -51,6 +51,9 @@
   </body>
   <script>
     const scene = document.querySelector("a-scene");
+    const camera = document.querySelector("#camera");
+    const model = document.querySelector("#model");
+
     let selectedPackageIndex = 1;
 
     // Check if there are device orientation controls
@@ -58,18 +61,14 @@
       console.log("Device orientation supported");
       scene.setAttribute("embedded", "true");
 
-      // Add cursor
-      camera.innerHTML = `      <a-entity cursor="fuse: true; fuseTimeout: 500"
+      // Add cursor inside camera element
+      camera.innerHTML += `<a-entity cursor="fuse: true; fuseTimeout: 500"
             position="0 0 -1"
             geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
             material="color: black; shader: flat">`;
     } else {
       console.log("Device orientation not supported");
     }
-
-    // Model when marker is not to be found
-    const model = document.querySelector("#model");
-    const camera = document.querySelector("#camera");
 
     model.addEventListener("object3dset", () => {
       console.log("Model loaded");
