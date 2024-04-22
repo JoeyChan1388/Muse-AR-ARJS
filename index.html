@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <a-scene vr-mode-ui="enabled: false">
+    <a-scene cursor="rayOrigin: mouse" vr-mode-ui="enabled: false">
       <a-assets>
         <img id="den_1" src="./tiles/den_1.jpg" />
         <img id="den_2" src="./tiles/den_2.jpg" />
@@ -21,14 +21,28 @@
         id="model"
         position="0 0 0"
         rotation="90 -180 0"
-        scale="10 10 10"
+        scale="50 50 50"
         gltf-model="./models/sphere.glb"
         material="src: #den_1"
         visible="true"
       >
-        
       </a-entity>
-      <a-entity id="camera" rotation="0 0 0" camera look-controls></a-entity>
+      <a-entity
+        id="marker"
+        geometry="primitive: sphere"
+        material="color: white"
+        position="0 0 -4"
+        scale="0.1 0.1 0.1"
+        onclick="changePackage(`entrance_2.jpg`)"
+      ></a-entity>
+      <a-entity
+        id="camera"
+        rotation="0 0 0"
+        position="0 0 0"
+        camera
+        look-controls
+      >
+    </a-entity>
     </a-scene>
 
     <button class="views-button" onclick="changePackage(`den_2.jpg`)">
@@ -37,6 +51,7 @@
   </body>
   <script>
     const scene = document.querySelector("a-scene");
+    let selectedPackageIndex = 1
 
     // Check if there are device orientation controls
     if (window.DeviceOrientationEvent) {
@@ -53,6 +68,7 @@
     model.addEventListener("object3dset", () => {
       console.log("Model loaded");
       changePackage("den_1.jpg");
+      placeOnCanvas(document.querySelector(".views-button"), document.querySelector("#marker").getAttribute("position"));
     });
 
     function changePackage(fileName) {
@@ -88,5 +104,32 @@
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
+
+    // Placing the overlay elements on the canvas.
+    function placeOnCanvas(elem, position) {
+      const tempVector = new THREE.Vector3(position.x, position.y, position.z);
+      const vector = tempVector.project(camera);
+
+      // convert the normalized position to CSS coordinates
+      const x =
+        (vector.x * 0.5 + 0.5) *
+        scene.domElement.getBoundingClientRect().width;
+      const y = (vector.y * -0.5 + 0.5) * scene.domElement.clientHeight;
+
+      // move the elem to that position
+      elem.style.transform = `translate(${x}px,${y}px) translate(50%, 50%)`;
+      elem.style.visibility = "visible";
+
+      // Place the unit info modal on the left or right side of the unit depending on the position of the unit.
+      if (x <= scene.domElement.getBoundingClientRect().width / 2) {
+        if (elem === selectedUnit) {
+          infoModal.style.transform = `translate(${x}px,${y}px) translate(50%, -50%)`;
+        }
+      } else {
+        if (elem === selectedUnit) {
+          infoModal.style.transform = `translate(${x}px,${y}px) translate(-100%, -50%)`;
+        }
+      }
+    }
   </script>
 </html>
