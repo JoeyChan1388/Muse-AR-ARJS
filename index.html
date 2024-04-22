@@ -54,12 +54,12 @@
     let selectedPackageIndex = 1
 
     // Check if there are device orientation controls
-    if (window.DeviceOrientationEvent) {
-      console.log("Device orientation supported");
-      scene.setAttribute("embedded", "true");
-    } else {
-      console.log("Device orientation not supported");
-    }
+    // if (window.DeviceOrientationEvent) {
+    //   console.log("Device orientation supported");
+    //   scene.setAttribute("embedded", "true");
+    // } else {
+    //   console.log("Device orientation not supported");
+    // }
 
     // Model when marker is not to be found
     const model = document.querySelector("#model");
@@ -68,7 +68,6 @@
     model.addEventListener("object3dset", () => {
       console.log("Model loaded");
       changePackage("den_1.jpg");
-      placeOnCanvas(document.querySelector(".views-button"), document.querySelector("#marker").getAttribute("position"));
     });
 
     function changePackage(fileName) {
@@ -104,32 +103,5 @@
     }
 
     window.addEventListener("deviceorientation", handleOrientation, true);
-
-    // Placing the overlay elements on the canvas.
-    function placeOnCanvas(elem, position) {
-      const tempVector = new THREE.Vector3(position.x, position.y, position.z);
-      const vector = tempVector.project(camera);
-
-      // convert the normalized position to CSS coordinates
-      const x =
-        (vector.x * 0.5 + 0.5) *
-        scene.domElement.getBoundingClientRect().width;
-      const y = (vector.y * -0.5 + 0.5) * scene.domElement.clientHeight;
-
-      // move the elem to that position
-      elem.style.transform = `translate(${x}px,${y}px) translate(50%, 50%)`;
-      elem.style.visibility = "visible";
-
-      // Place the unit info modal on the left or right side of the unit depending on the position of the unit.
-      if (x <= scene.domElement.getBoundingClientRect().width / 2) {
-        if (elem === selectedUnit) {
-          infoModal.style.transform = `translate(${x}px,${y}px) translate(50%, -50%)`;
-        }
-      } else {
-        if (elem === selectedUnit) {
-          infoModal.style.transform = `translate(${x}px,${y}px) translate(-100%, -50%)`;
-        }
-      }
-    }
   </script>
 </html>
