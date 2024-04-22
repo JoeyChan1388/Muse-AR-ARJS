@@ -62,12 +62,15 @@
     </a-scene>
 
     <!-- Button to change the package -->
+    <!-- TODO: Make this button open a menu which has buttons for selecting packages -->
+    <!-- The buttons in the menu should use the changePackage function -->
     <button class="views-button" onclick="changePackage()">
       Change Package
     </button>
   </body>
   <script>
-    // Example of hotspot array 
+    // Hotspots for the scenes
+    // TODO: Add hotspots to completely traverse the tour. 
     const sceneHotspots = {
       // Hotspots for "den"
       den: {
@@ -147,6 +150,7 @@
       selectedScene = fileName.split(".")[0];
     }
 
+    // TODO: add a parameter to change the package to the index of the package someone selects from the menu
     function changePackage() {
         selectedPackageIndex = selectedPackageIndex === 1 ? 2 : 1;
         console.log("Selected package: ", selectedPackageIndex);
