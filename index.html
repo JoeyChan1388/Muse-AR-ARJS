@@ -29,6 +29,7 @@
       </a-entity>
       <a-entity
         id="marker"
+        class="clickable"
         geometry="primitive: sphere"
         material="color: white"
         position="0 0 -4"
@@ -44,6 +45,7 @@
       >
       <a-entity
             cursor="fuse: true; fuseTimeout: 500"
+            objects=".clickable"
             position="0 0 -1"
             geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
             material="color: black; shader: flat">
