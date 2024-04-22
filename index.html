@@ -33,7 +33,7 @@
         material="color: white"
         position="0 0 -4"
         scale="0.1 0.1 0.1"
-        onclick="changePackage(`entrance_2.jpg`)"
+        onclick="window.alert('Clicked')"
       ></a-entity>
       <a-entity
         id="camera"
@@ -54,12 +54,12 @@
     let selectedPackageIndex = 1
 
     // Check if there are device orientation controls
-    // if (window.DeviceOrientationEvent) {
-    //   console.log("Device orientation supported");
-    //   scene.setAttribute("embedded", "true");
-    // } else {
-    //   console.log("Device orientation not supported");
-    // }
+    if (window.DeviceOrientationEvent) {
+      console.log("Device orientation supported");
+      scene.setAttribute("embedded", "true");
+    } else {
+      console.log("Device orientation not supported");
+    }
 
     // Model when marker is not to be found
     const model = document.querySelector("#model");
