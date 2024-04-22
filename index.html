@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <a-scene cursor="rayOrigin: mouse" vr-mode-ui="enabled: false">
+    <a-scene vr-mode-ui="enabled: false">
       <a-assets>
         <img id="den_1" src="./tiles/den_1.jpg" />
         <img id="den_2" src="./tiles/den_2.jpg" />
@@ -43,7 +43,7 @@
         look-controls
       >
       <a-entity
-            cursor="fuse: true; fuseTimeout: 5000;"
+            cursor="rayOrigin: mouse"
             position="0 0 -1"
             geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
             material="color: black; shader: flat">
@@ -68,10 +68,10 @@
       scene.setAttribute("embedded", "true");
 
       // Add cursor inside camera element
-      camera.innerHTML += `<a-entity
-            position="0 0 -1"
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
-            material="color: black; shader: flat">`;
+      // camera.innerHTML += `<a-entity
+      //       position="0 0 -1"
+      //       geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+      //       material="color: black; shader: flat">`;
     } else {
       console.log("Device orientation not supported");
     }
