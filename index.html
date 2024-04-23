@@ -12,7 +12,7 @@
   <body>
     <div class="viewer__container">
           <!-- Scene for AR -->
-      <a-scene vr-mode-ui="enabled: false" >
+      <a-scene>
         <!-- Assets to be used -->
         <a-assets>
           <img id="den_1" src="./tiles/1/den.jpg" />
@@ -105,14 +105,23 @@
     let selectedScene = "den";
 
     // Check if there are device orientation controls
-    
-
-    if (window.DeviceOrientationEvent) {
+    // Check if the device is a phone
+    if (window.DeviceOrientationEvent && window.innerWidth < 768) {
       console.log("Device orientation supported");
       scene.setAttribute("embedded", "true");
     } else {
       console.log("Device orientation not supported");
+      scene.setAttribute("embedded", "false");
     }
+    
+
+    // if (window.DeviceOrientationEvent) {
+    //   console.log("Device orientation supported");
+    //   scene.setAttribute("embedded", "true");
+    // } else {
+    //   console.log("Device orientation not supported");
+    //   scene.setAttribute("embedded", "false");
+    // }
 
     model.addEventListener("object3dset", () => {
       console.log("Model loaded");
