@@ -106,7 +106,9 @@
 
     // Check if there are device orientation controls
     // Check if the device is a phone
-    if (window.DeviceOrientationEvent && window.innerWidth < 768) {
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (window.DeviceOrientationEvent && isMobile) {
       console.log("Device orientation supported");
       scene.setAttribute("embedded", "true");
     } else {
