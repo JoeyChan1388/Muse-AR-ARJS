@@ -108,13 +108,14 @@
     // Check if the device is a phone
     var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    if (window.DeviceOrientationEvent || isMobile) {
+    if (window.DeviceOrientationEvent && isMobile) {
       console.log("Device orientation supported");
       window.alert("Mobile Device Detected. Please move your device to look around the room.")
       scene.setAttribute("embedded", "true");
     } else {
       console.log("Device orientation not supported");
-      scene.setAttribute("embedded", "false");
+      // Delete embedded attribute to allow for mouse controls
+      scene.removeAttribute("embedded");
     }
     
     // if (window.DeviceOrientationEvent) {
