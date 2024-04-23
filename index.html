@@ -111,9 +111,9 @@
     if (window.DeviceOrientationEvent && isMobile) {
       console.log("Device orientation supported");
       scene.setAttribute("embedded", "true");
+      window.alert("Mobile Device Detected. Please move your device to look around the room.")
     } else {
       console.log("Device orientation not supported");
-      scene.setAttribute("embedded", "false");
     }
     
 
