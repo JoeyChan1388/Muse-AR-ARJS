@@ -74,21 +74,21 @@
     // Hotspots for the scenes
     // TODO: Add hotspots to completely traverse the tour.
     const sceneHotspots = {
-      // Hotspots for "den"
+      // Hotspots for the scene "den"
       den: {
         entrance: {
           // Position of the hotspot around the room
-          position: "0 -0.2 -4",
+          position: "3 -0.2 -1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
           // Change the parameter to the file of the scene you want to go to
-          onclick: "changeScene(`entrance.jpg`)",
+          onclick: "changeScene(`kitchen.jpg`)",
         },
       },
       // Hotspots for "entrance"
-      entrance: {
+      kitchen: {
         den: {
-          position: "0 -0.2 4",
+          position: "-3 -0.2 1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
           onclick: "changeScene(`den.jpg`)",
@@ -103,6 +103,7 @@
     let selectedPackageIndex = 1;
     let selectedScene = "den";
 
+    // Function to handle the device orientation whenever it changes
     function handleOrientation(event) {
       // For moving the camera with the device orientation model rotation 0,0,0
       camera.setAttribute("rotation", {
@@ -119,9 +120,11 @@
         navigator.userAgent
       );
 
+    // When the scene loads
     model.addEventListener("object3dset", () => {
       console.log("Model loaded");
 
+      // Check if the device supports device orientation and is on mobile browser
       if (window.DeviceOrientationEvent && isMobile) {
         console.log("Device orientation supported");
         // window.alert("Mobile Device Detected. Please move your device to look around the room.")
@@ -173,12 +176,14 @@
       Object.keys(sceneHotspots[selectedScene]).forEach((hotspot) => {
         let hotspotData = sceneHotspots[selectedScene][hotspot];
         let newHotspot = document.createElement("a-entity");
+
         newHotspot.setAttribute("class", "clickable");
         newHotspot.setAttribute("geometry", "primitive: sphere");
         newHotspot.setAttribute("material", "color: white");
         newHotspot.setAttribute("position", hotspotData.position);
         newHotspot.setAttribute("scale", hotspotData.scale);
         newHotspot.setAttribute("onclick", hotspotData.onclick);
+
         scene.appendChild(newHotspot);
       });
     }
