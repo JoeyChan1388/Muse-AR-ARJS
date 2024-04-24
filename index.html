@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ar.js Test</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
     <!-- we import arjs version without NFT but with marker + location based support -->
     <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
     <link rel="stylesheet" href="./index.css" />
@@ -110,26 +111,19 @@
 
     if (window.DeviceOrientationEvent && isMobile) {
       console.log("Device orientation supported");
-      window.alert("Mobile Device Detected. Please move your device to look around the room.")
+      // window.alert("Mobile Device Detected. Please move your device to look around the room.")
       scene.setAttribute("embedded", "true");
     } else {
       console.log("Device orientation not supported");
       // Delete embedded attribute to allow for mouse controls
       scene.removeAttribute("embedded");
     }
-    
-    // if (window.DeviceOrientationEvent) {
-    //   console.log("Device orientation supported");
-    //   scene.setAttribute("embedded", "true");
-    // } else {
-    //   console.log("Device orientation not supported");
-    //   scene.setAttribute("embedded", "false");
-    // }
 
     model.addEventListener("object3dset", () => {
       console.log("Model loaded");
       changeScene("den.jpg");
     });
+
 
     function changeScene(fileName) {
       let modelMesh = model.getObject3D("mesh");
