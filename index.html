@@ -146,6 +146,13 @@
     function changeScene(fileName) {
       let modelMesh = model.getObject3D("mesh");
 
+      // Delete all clickables
+      let clickables = document.querySelectorAll(".clickable");
+      clickables.forEach((clickable) =>
+        clickable.parentNode.removeChild(clickable)
+      );
+
+      // Change the texture of the model
       modelMesh.traverse(function (node) {
         if (node.isMesh) {
           let newTexture = new THREE.TextureLoader().load(
@@ -156,13 +163,11 @@
         }
       });
 
+      // Log output
       console.log("Model: ", modelMesh);
 
-      // Delete all clickables
-      let clickables = document.querySelectorAll(".clickable");
-      clickables.forEach((clickable) =>
-        clickable.parentNode.removeChild(clickable)
-      );
+      // Set the selected scene (without the file extension)
+      selectedScene = fileName.split(".")[0];
 
       // Add new clickables
       Object.keys(sceneHotspots[selectedScene]).forEach((hotspot) => {
@@ -176,9 +181,6 @@
         newHotspot.setAttribute("onclick", hotspotData.onclick);
         scene.appendChild(newHotspot);
       });
-
-      // Set the selected scene (without the file extension)
-      selectedScene = fileName.split(".")[0];
     }
   </script>
 </html>
