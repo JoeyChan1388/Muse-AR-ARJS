@@ -69,27 +69,137 @@
         kitchen: {
           // Position of the hotspot around the room
           // X - Side to side, Y - Up and down, Z - Forward and backward
-          position: "3 -0.2 -1",
+          position: "2 -0.2 -1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
           // Change the parameter to the file of the scene you want to go to
           onclick: "changeScene(`kitchen.jpg`)",
         },
-        // Hotspot to go to the "kitchen" scene
+        // Hotspot to go to the "living room" scene
         livingRoom: {
           position: "2 -0.2 -5",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
           onclick: "changeScene(`livingroom.jpg`)",
         },
+
+        // Hotspot to go to the "entrance" scene
+        entrance: {
+          position: "0 -0.2 -5",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`entrance.jpg`)",
+        },
       },
-      // Hotspots for the scene "entrance" 
+      // Hotspots for the scene "kitchen" 
       kitchen: {
+        //hotspot to go to the "den" scene.
         den: {
           position: "-3 -0.2 1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
           onclick: "changeScene(`den.jpg`)",
+        },
+      
+        //hotspot to go to the "livingroom" scene.
+      livingRoom: {
+        position: "0 -0.2 -5",
+        rotation: "0 0 0",
+        scale: "0.1 0.1 0.1",
+        onclick: "changeScene(`livingroom.jpg`)",
+        },
+
+        //hotspot to go to the "bedroom" scene.
+      bedroom: {
+        position: "-2 -0.2 -5",
+        rotation: "0 0 0",
+        scale: "0.1 0.1 0.1",
+        onclick: "changeScene(`bedroom.jpg`)",
+        }, 
+        
+      //hotspot to go to the "bathroom" scene.
+      bathroom: {
+        position: "-3.5 -0.2 -5",
+        rotation: "0 0 0",
+        scale: "0.1 0.1 0.1",
+        onclick: "changeScene(`bathroom.jpg`)",
+        },  
+      },
+      // Hotspots for the scene "living room" 
+      livingroom: {
+        //hotspot to go to the "bathroom" scene.
+        bathroom: {
+          position: "-2 -0.2 1",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`bathroom.jpg`)",
+        },
+         //hotspot to go to the "bdroom" scene.
+        bedroom: {
+          position: "-3 -0.2 0",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`bedroom.jpg`)",
+        },
+        //hotspot to go to the "den" scene.
+        den: {
+          position: "-2 -0.2 4",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`den.jpg`)",
+        },
+        //hotspot to go to the "kitchen" scene.
+        kitchen: {
+          position: "0 -0.2 4",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`kitchen.jpg`)",
+        },
+      },
+
+      // Hotspots for the scene "bedroom" 
+      bedroom: {
+        //hotspot to go to the "kitchen" scene.
+        kitchen: {
+          position: "1 -0.2 1",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`kitchen.jpg`)",
+        },       
+      },
+      // Hotspots for the scene "bathroom" 
+      bathroom: {
+        //hotspot to go to the "kitchen" scene.
+        kitchen: {
+          position: "3 -0.2 1",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`kitchen.jpg`)",
+        },  
+        //hotspot to go to the "living room" scene.
+        livingRoom: {
+        position: "5 -0.2 -4",
+        rotation: "0 0 0",
+        scale: "0.1 0.1 0.1",
+        onclick: "changeScene(`livingroom.jpg`)",
+        },
+      },
+
+      // Hotspots for the scene "entrance" 
+      entrance: {
+        //hotspot to go to the "kitchen" scene.
+        kitchen: {
+          position: "3 -0.2 1",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`kitchen.jpg`)",
+        },  
+        //hotspot to go to the "living room" scene.
+        livingRoom: {
+        position: "2 -0.2 -4",
+        rotation: "0 0 0",
+        scale: "0.1 0.1 0.1",
+        onclick: "changeScene(`livingroom.jpg`)",
         },
       },
     };
