@@ -66,17 +66,12 @@
       <!-- Button to change the package -->
       <!-- TODO: Make this button open a menu which has buttons for selecting packages -->
       <!-- The buttons in the menu should use the changePackage function -->
-      <button class="views-button" onclick="togglePackageMenu()">
+      <button id="views-button" onclick="togglePackageMenu()">
         Packages
       </button>
-      <select
-        id="packageSelect"
-        onchange="changePackage(this.value)"
-        style="display: none"
-      >
-        <option value="1">Classic 1</option>
-        <option value="2">Classic 2</option>
-      </select>
+      <div id="package-menu" style="display: none;">
+        <!-- Fill with packages -->
+      </div>
     </div>
   </body>
   <script>
@@ -251,6 +246,7 @@
     };
 
     const exterior_button = document.querySelector("#exterior_button");
+    const packageMenu = document.getElementById("package-menu");
 
     const scene = document.querySelector("a-scene");
     const camera = document.querySelector("#camera");
@@ -259,6 +255,29 @@
     let selectedPackageIndex = 1;
     let exteriorPackageIndex = 3;
     let selectedScene = "den";
+
+    // List of packages
+    const packageList = {
+      1: "Classic 1",
+      2: "Classic 2",
+      3: "Classic 3",
+      4: "Enhanced 1",
+      5: "Enhanced 2",
+      6: "Enhanced 3",
+      7: "Elite 1",
+      8: "Elite 2",
+      9: "Elite 3",
+    };
+
+    function populatePackageMenu () {
+      Object.keys(packageList).forEach((packageIndex) => {
+      let packageButton = document.createElement("button");
+      packageButton.innerHTML = packageList[packageIndex];
+      packageButton.onclick = () => changePackage(packageIndex);
+      packageMenu.appendChild(packageButton);
+    });
+    }
+   
 
     // Function to handle the device orientation whenever it changes
     function handleOrientation(event) {
@@ -293,19 +312,19 @@
         scene.removeAttribute("embedded");
       }
 
+      populatePackageMenu();
       changeScene("den.jpg");
     });
 
     function togglePackageMenu() {
-      var packageSelect = document.getElementById("packageSelect");
-      if (packageSelect.style.display === "none") {
-        packageSelect.style.display = "block";
+      var packageMenu = document.getElementById("package-menu");
+      if (packageMenu.style.display === "none") {
+        packageMenu.style.display = "grid";
       } else {
-        packageSelect.style.display = "none";
+        packageMenu.style.display = "none";
       }
     }
 
-    // TODO: add a parameter to change the package to the index of the package someone selects from the menu
     function changePackage(newPackageIndex) {
       if (newPackageIndex) {
         selectedPackageIndex = newPackageIndex;
