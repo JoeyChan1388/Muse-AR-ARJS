@@ -22,7 +22,7 @@ body {
   z-index: 1;
 }
 
-a-scene {
+/* a-scene {
   width: 100%;
   height: 100%;
   padding: 10px;
@@ -33,7 +33,7 @@ a-scene {
 
 .a-enter-vr-button {
   display: block;
-}
+} */
 
 .views-button {
   padding: 8px 25px;

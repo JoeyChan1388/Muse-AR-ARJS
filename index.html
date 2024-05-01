@@ -31,6 +31,17 @@
         >
         </a-entity>
 
+        <!-- <a-entity
+          id="exterior_button"
+          class="clickable"
+          position="-2 0 2"
+          rotation="0 45 0"
+          gltf-model="./models/exterior_button.glb"
+          scale="1 1 1"
+          visible="true"
+        >
+        </a-entity> -->
+
         <!-- Camera entity -->
         <a-entity
           id="camera"
@@ -91,7 +102,7 @@
           onclick: "changeScene(`entrance.jpg`)",
         },
       },
-      // Hotspots for the scene "kitchen" 
+      // Hotspots for the scene "kitchen"
       kitchen: {
         //hotspot to go to the "den" scene.
         den: {
@@ -100,32 +111,32 @@
           scale: "0.1 0.1 0.1",
           onclick: "changeScene(`den.jpg`)",
         },
-      
+
         //hotspot to go to the "livingroom" scene.
-      livingRoom: {
-        position: "0 -0.2 -5",
-        rotation: "0 0 0",
-        scale: "0.1 0.1 0.1",
-        onclick: "changeScene(`livingroom.jpg`)",
+        livingRoom: {
+          position: "0 -0.2 -5",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`livingroom.jpg`)",
         },
 
         //hotspot to go to the "bedroom" scene.
-      bedroom: {
-        position: "-2 -0.2 -5",
-        rotation: "0 0 0",
-        scale: "0.1 0.1 0.1",
-        onclick: "changeScene(`bedroom.jpg`)",
-        }, 
-        
-      //hotspot to go to the "bathroom" scene.
-      bathroom: {
-        position: "-3.5 -0.2 -5",
-        rotation: "0 0 0",
-        scale: "0.1 0.1 0.1",
-        onclick: "changeScene(`bathroom.jpg`)",
-        },  
+        bedroom: {
+          position: "-2 -0.2 -5",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`bedroom.jpg`)",
+        },
+
+        //hotspot to go to the "bathroom" scene.
+        bathroom: {
+          position: "-3.5 -0.2 -5",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`bathroom.jpg`)",
+        },
       },
-      // Hotspots for the scene "living room" 
+      // Hotspots for the scene "living room"
       livingroom: {
         //hotspot to go to the "bathroom" scene.
         bathroom: {
@@ -134,7 +145,7 @@
           scale: "0.1 0.1 0.1",
           onclick: "changeScene(`bathroom.jpg`)",
         },
-         //hotspot to go to the "bdroom" scene.
+        //hotspot to go to the "bdroom" scene.
         bedroom: {
           position: "-3 -0.2 0",
           rotation: "0 0 0",
@@ -157,7 +168,7 @@
         },
       },
 
-      // Hotspots for the scene "bedroom" 
+      // Hotspots for the scene "bedroom"
       bedroom: {
         //hotspot to go to the "kitchen" scene.
         kitchen: {
@@ -165,9 +176,9 @@
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
           onclick: "changeScene(`kitchen.jpg`)",
-        },       
+        },
       },
-      // Hotspots for the scene "bathroom" 
+      // Hotspots for the scene "bathroom"
       bathroom: {
         //hotspot to go to the "kitchen" scene.
         kitchen: {
@@ -175,17 +186,16 @@
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
           onclick: "changeScene(`kitchen.jpg`)",
-        },  
+        },
         //hotspot to go to the "living room" scene.
         livingRoom: {
-        position: "5 -0.2 -4",
-        rotation: "0 0 0",
-        scale: "0.1 0.1 0.1",
-        onclick: "changeScene(`livingroom.jpg`)",
+          position: "5 -0.2 -4",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`livingroom.jpg`)",
         },
       },
-
-      // Hotspots for the scene "entrance" 
+      // Hotspots for the scene "entrance"
       entrance: {
         //hotspot to go to the "kitchen" scene.
         kitchen: {
@@ -193,22 +203,35 @@
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
           onclick: "changeScene(`kitchen.jpg`)",
-        },  
+        },
         //hotspot to go to the "living room" scene.
         livingRoom: {
-        position: "2 -0.2 -4",
-        rotation: "0 0 0",
-        scale: "0.1 0.1 0.1",
-        onclick: "changeScene(`livingroom.jpg`)",
+          position: "2 -0.2 -4",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`livingroom.jpg`)",
+        },
+      },
+      // Hotspots for the scene "tower_entrances"
+      tower_entrances: {
+        //hotspot to go to the "den" scene.
+        den: {
+          position: "-3 4 -1",
+          rotation: "0 0 0",
+          scale: "0.1 0.1 0.1",
+          onclick: "changeScene(`den.jpg`); changePackage(1)",
         },
       },
     };
+
+    const exterior_button = document.querySelector("#exterior_button");
 
     const scene = document.querySelector("a-scene");
     const camera = document.querySelector("#camera");
     const model = document.querySelector("#model");
 
     let selectedPackageIndex = 1;
+    let exteriorPackageIndex = 3;
     let selectedScene = "den";
 
     // Function to handle the device orientation whenever it changes
@@ -248,8 +271,12 @@
     });
 
     // TODO: add a parameter to change the package to the index of the package someone selects from the menu
-    function changePackage() {
-      selectedPackageIndex = selectedPackageIndex === 1 ? 2 : 1;
+    function changePackage(newPackageIndex) {
+      if (newPackageIndex) {
+        selectedPackageIndex = newPackageIndex;
+      } else {
+        selectedPackageIndex = selectedPackageIndex === 1 ? 2 : 1;
+      }
       console.log("Selected package: ", selectedPackageIndex);
       changeScene(selectedScene + ".jpg");
     }
@@ -294,6 +321,21 @@
 
         scene.appendChild(newHotspot);
       });
+
+      // Add exterior clickable
+      if (selectedScene === "den") {
+          let newExteriorButton = document.createElement("a-entity");
+
+          newExteriorButton.setAttribute("class", "clickable");
+          newExteriorButton.setAttribute("gltf-model", "./models/exterior_button.glb");
+          newExteriorButton.setAttribute("position", "-2 0 2");
+          newExteriorButton.setAttribute("rotation", "0 45 0");
+          newExteriorButton.setAttribute("scale", "1 1 1");
+          newExteriorButton.setAttribute("visible", "true");
+          newExteriorButton.setAttribute("onclick", "changePackage(exteriorPackageIndex); changeScene(`tower_entrances.jpg`)");
+          
+          scene.appendChild(newExteriorButton);
+        }
     }
   </script>
 </html>
