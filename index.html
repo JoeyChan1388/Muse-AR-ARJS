@@ -8,6 +8,7 @@
 
     <!-- we import arjs version without NFT but with marker + location based support -->
     <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
@@ -65,9 +66,17 @@
       <!-- Button to change the package -->
       <!-- TODO: Make this button open a menu which has buttons for selecting packages -->
       <!-- The buttons in the menu should use the changePackage function -->
-      <button class="views-button" onclick="changePackage()">
-        Change Package
+      <button class="views-button" onclick="togglePackageMenu()">
+        Packages
       </button>
+      <select
+        id="packageSelect"
+        onchange="changePackage(this.value)"
+        style="display: none"
+      >
+        <option value="1">Classic 1</option>
+        <option value="2">Classic 2</option>
+      </select>
     </div>
   </body>
   <script>
@@ -80,6 +89,7 @@
         kitchen: {
           // Position of the hotspot around the room
           // X - Side to side, Y - Up and down, Z - Forward and backward
+          tooltip: "Kitchen",
           position: "2 -0.2 -1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -88,6 +98,7 @@
         },
         // Hotspot to go to the "living room" scene
         livingRoom: {
+          tooltip: "Living Room",
           position: "2 -0.2 -5",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -96,6 +107,7 @@
 
         // Hotspot to go to the "entrance" scene
         entrance: {
+          tooltip: "Entrance",
           position: "0 -0.2 -5",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -106,6 +118,7 @@
       kitchen: {
         //hotspot to go to the "den" scene.
         den: {
+          tooltip: "Den",
           position: "-3 -0.2 1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -114,6 +127,7 @@
 
         //hotspot to go to the "livingroom" scene.
         livingRoom: {
+          tooltip: "Living Room",
           position: "0 -0.2 -5",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -122,6 +136,7 @@
 
         //hotspot to go to the "bedroom" scene.
         bedroom: {
+          tooltip: "Bedroom",
           position: "-2 -0.2 -5",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -130,6 +145,7 @@
 
         //hotspot to go to the "bathroom" scene.
         bathroom: {
+          tooltip: "Bathroom",
           position: "-3.5 -0.2 -5",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -140,6 +156,7 @@
       livingroom: {
         //hotspot to go to the "bathroom" scene.
         bathroom: {
+          tooltip: "Bathroom",
           position: "-2 -0.2 1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -147,6 +164,7 @@
         },
         //hotspot to go to the "bdroom" scene.
         bedroom: {
+          tooltip: "Bedroom",
           position: "-3 -0.2 0",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -154,6 +172,7 @@
         },
         //hotspot to go to the "den" scene.
         den: {
+          tooltip: "Den",
           position: "-2 -0.2 4",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -161,6 +180,7 @@
         },
         //hotspot to go to the "kitchen" scene.
         kitchen: {
+          tooltip: "Kitchen",
           position: "0 -0.2 4",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -172,6 +192,7 @@
       bedroom: {
         //hotspot to go to the "kitchen" scene.
         kitchen: {
+          tooltip: "Kitchen",
           position: "1 -0.2 1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -182,6 +203,7 @@
       bathroom: {
         //hotspot to go to the "kitchen" scene.
         kitchen: {
+          tooltip: "Kitchen",
           position: "3 -0.2 1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -189,6 +211,7 @@
         },
         //hotspot to go to the "living room" scene.
         livingRoom: {
+          tooltip: "Living Room",
           position: "5 -0.2 -4",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -199,6 +222,7 @@
       entrance: {
         //hotspot to go to the "kitchen" scene.
         kitchen: {
+          tooltip: "Kitchen",
           position: "3 -0.2 1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -206,6 +230,7 @@
         },
         //hotspot to go to the "living room" scene.
         livingRoom: {
+          tooltip: "Living Room",
           position: "2 -0.2 -4",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -216,6 +241,7 @@
       tower_entrances: {
         //hotspot to go to the "den" scene.
         den: {
+          tooltip: "Interior",
           position: "-3 4 -1",
           rotation: "0 0 0",
           scale: "0.1 0.1 0.1",
@@ -270,6 +296,15 @@
       changeScene("den.jpg");
     });
 
+    function togglePackageMenu() {
+      var packageSelect = document.getElementById("packageSelect");
+      if (packageSelect.style.display === "none") {
+        packageSelect.style.display = "block";
+      } else {
+        packageSelect.style.display = "none";
+      }
+    }
+
     // TODO: add a parameter to change the package to the index of the package someone selects from the menu
     function changePackage(newPackageIndex) {
       if (newPackageIndex) {
@@ -301,6 +336,39 @@
         }
       });
 
+      function addToolTip(hotspot, hotspotData) {
+        //Add tooltip here
+        hotspot.setAttribute("material", "color: red");
+
+        let tooltip = document.createElement("a-text");
+        tooltip.setAttribute("geometry", "primitive: plane");
+        tooltip.setAttribute("material", "color: black");
+
+        // Way to change the position of the tooltip to be above the hotspot
+        const tooltipPosition = hotspotData.position.split(" ");
+        tooltipPosition[1] = parseFloat(tooltipPosition[1]) + 0.5;
+        tooltip.setAttribute("position", tooltipPosition.join(" "));
+
+        tooltip.setAttribute("scale", "0.8 0.5 0.8");
+        tooltip.setAttribute("text", {
+          value: hotspotData.tooltip,
+          color: "white",
+          align: "center",
+          width: 4,
+        });
+
+        tooltip.setAttribute("look-at", "#camera");
+        scene.appendChild(tooltip);
+
+        hotspot.addEventListener("mouseleave", function () {
+          hotspot.setAttribute("material", "color: white");
+          //Delete tooltip
+          if (tooltip.parentNode) {
+            tooltip.parentNode.removeChild(tooltip);
+          }
+        });
+      }
+
       // Log output
       console.log("Model: ", modelMesh);
 
@@ -319,23 +387,33 @@
         newHotspot.setAttribute("scale", hotspotData.scale);
         newHotspot.setAttribute("onclick", hotspotData.onclick);
 
+        newHotspot.addEventListener("mouseenter", function () {
+          addToolTip(newHotspot, hotspotData);
+        });
+
         scene.appendChild(newHotspot);
       });
 
       // Add exterior clickable
       if (selectedScene === "den") {
-          let newExteriorButton = document.createElement("a-entity");
+        let newExteriorButton = document.createElement("a-entity");
 
-          newExteriorButton.setAttribute("class", "clickable");
-          newExteriorButton.setAttribute("gltf-model", "./models/exterior_button.glb");
-          newExteriorButton.setAttribute("position", "-2 0 2");
-          newExteriorButton.setAttribute("rotation", "0 45 0");
-          newExteriorButton.setAttribute("scale", "1 1 1");
-          newExteriorButton.setAttribute("visible", "true");
-          newExteriorButton.setAttribute("onclick", "changePackage(exteriorPackageIndex); changeScene(`tower_entrances.jpg`)");
-          
-          scene.appendChild(newExteriorButton);
-        }
+        newExteriorButton.setAttribute("class", "clickable");
+        newExteriorButton.setAttribute(
+          "gltf-model",
+          "./models/exterior_button.glb"
+        );
+        newExteriorButton.setAttribute("position", "-2 0 2");
+        newExteriorButton.setAttribute("rotation", "0 45 0");
+        newExteriorButton.setAttribute("scale", "1 1 1");
+        newExteriorButton.setAttribute("visible", "true");
+        newExteriorButton.setAttribute(
+          "onclick",
+          "changePackage(exteriorPackageIndex); changeScene(`tower_entrances.jpg`)"
+        );
+
+        scene.appendChild(newExteriorButton);
+      }
     }
   </script>
 </html>

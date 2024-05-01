@@ -61,3 +61,21 @@ select {
   font-family: "Roboto", sans-serif;
   width: 200px;
 }
+
+#packageSelect {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: white; 
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+}
+
+#packageSelect option {
+  background-color: white;
+  color: black;
+}
