@@ -66,10 +66,19 @@
       <!-- Button to change the package -->
       <!-- TODO: Make this button open a menu which has buttons for selecting packages -->
       <!-- The buttons in the menu should use the changePackage function -->
-      <button id="views-button" onclick="togglePackageMenu()">
-        Packages
-      </button>
+      <!-- Button for changing scenes -->
+    <button id="views-button" class="views-button" onclick=" toggleSceneMenu()">
+      Rooms
+    </button>
+
+    <!-- Button for changing packages -->
+    <button id="package-button" class="package-button" onclick="togglePackageMenu()">
+      Packages
+    </button>
       <div id="package-menu" style="display: none;">
+        <!-- Fill with packages -->
+      </div>
+      <div id="room-menu" style="display: none;">
         <!-- Fill with packages -->
       </div>
     </div>
@@ -269,6 +278,9 @@
       9: "Elite 3",
     };
 
+  
+
+
     function populatePackageMenu () {
       Object.keys(packageList).forEach((packageIndex) => {
       let packageButton = document.createElement("button");
@@ -277,6 +289,28 @@
       packageMenu.appendChild(packageButton);
     });
     }
+
+    //list for rooms
+    const roomList = {
+    den: "Den",
+    kitchen: "Kitchen",
+    livingRoom: "Living Room",
+    bedroom: "Bedroom",
+    bathroom: "Bathroom",
+    entrance: "Entrance",
+    tower_entrances: "Tower Entrances",
+  };
+
+  function populateRoomMenu() {
+    const roomMenu = document.getElementById("room-menu");
+    Object.keys(roomList).forEach((room) => {
+      let roomButton = document.createElement("button");
+      roomButton.innerHTML = roomList[room];
+      roomButton.onclick = () => changeScene(`${room}.jpg`);
+      roomMenu.appendChild(roomButton);
+    });
+  }
+
    
 
     // Function to handle the device orientation whenever it changes
@@ -313,17 +347,36 @@
       }
 
       populatePackageMenu();
+      populateRoomMenu();
       changeScene("den.jpg");
     });
 
     function togglePackageMenu() {
-      var packageMenu = document.getElementById("package-menu");
-      if (packageMenu.style.display === "none") {
-        packageMenu.style.display = "grid";
-      } else {
-        packageMenu.style.display = "none";
-      }
-    }
+  var packageMenu = document.getElementById("package-menu");
+  var roomMenu = document.getElementById("room-menu");
+
+  if (packageMenu.style.display === "none" || packageMenu.style.display === "") {
+    packageMenu.style.display = "grid";
+    // Hide the room menu when showing the package menu
+    roomMenu.style.display = "none";
+  } else {
+    packageMenu.style.display = "none";
+  }
+}
+
+function toggleSceneMenu() {
+  var roomMenu = document.getElementById("room-menu");
+  var packageMenu = document.getElementById("package-menu");
+
+  if (roomMenu.style.display === "none" || roomMenu.style.display === "") {
+    roomMenu.style.display = "grid";
+    // Hide the package menu when showing the room menu
+    packageMenu.style.display = "none";
+  } else {
+    roomMenu.style.display = "none";
+  }
+}
+
 
     function changePackage(newPackageIndex) {
       if (newPackageIndex) {
